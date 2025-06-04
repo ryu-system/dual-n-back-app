@@ -8,7 +8,7 @@ import { GameInfo } from './GameInfo';
 import { GameSettings } from './GameSettings';
 import { GameStats } from './GameStats';
 import { Button } from '@/components/ui/button';
-import { Settings, BarChart3 } from 'lucide-react';
+import { Settings, BarChart3, Play, Eye, Type } from 'lucide-react';
 import type { GameConfig, GameResult } from '../types/game';
 import { DEFAULT_CONFIG } from '../types/game';
 
@@ -92,7 +92,32 @@ export const DualNBackGame: React.FC = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,119,198,0.3),transparent_70%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_80%,rgba(119,198,255,0.3),transparent_70%)]"></div>
         
-        <div className="flex flex-col items-center gap-2 sm:gap-4 lg:gap-8 lg:flex-row max-w-6xl w-full relative z-10 px-2 sm:px-4 lg:px-8">
+        {/* Mobile Layout (lg and below) */}
+        <div className="flex flex-col items-center gap-2 w-full relative z-10 px-2 sm:px-4 lg:hidden">
+          <GameGrid
+            activePosition={gameState.isRunning ? currentPosition : null}
+            showFeedback={gameState.showFeedback}
+            feedbackType={gameState.feedbackType}
+            currentLetter={gameState.isRunning ? currentLetter : null}
+          />
+          
+          <GameControls
+            isRunning={gameState.isRunning}
+            onStart={startGame}
+            onVisualInput={() => handleInput('visual')}
+            onAudioInput={() => handleInput('audio')}
+            currentLevel={gameConfig.nLevel}
+          />
+          
+          <GameInfo
+            currentTrialIndex={gameState.currentTrialIndex}
+            totalTrials={gameConfig.totalTrials}
+            nLevel={gameConfig.nLevel}
+          />
+        </div>
+
+        {/* Desktop Layout (lg and above) */}
+        <div className="hidden lg:flex lg:flex-row items-center gap-8 max-w-6xl w-full relative z-10 px-8">
           <div className="flex-1 flex justify-center">
             <GameGrid
               activePosition={gameState.isRunning ? currentPosition : null}
@@ -102,7 +127,7 @@ export const DualNBackGame: React.FC = () => {
             />
           </div>
           
-          <div className="flex flex-col gap-2 sm:gap-4 lg:gap-6 w-full lg:w-auto">
+          <div className="flex flex-col gap-6 w-auto">
             <GameInfo
               currentTrialIndex={gameState.currentTrialIndex}
               totalTrials={gameConfig.totalTrials}
@@ -118,7 +143,7 @@ export const DualNBackGame: React.FC = () => {
             />
             
             {!gameState.isRunning && (
-              <div className="space-y-2 sm:space-y-3">
+              <div className="space-y-3">
                 <Button
                   variant="outline"
                   onClick={() => setShowSettings(true)}
