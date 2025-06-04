@@ -1,8 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Settings2, Volume2, VolumeX } from 'lucide-react';
+import { Settings2 } from 'lucide-react';
 import type { GameConfig } from '../types/game';
 
 interface GameSettingsProps {
@@ -79,24 +78,6 @@ export const GameSettings: React.FC<GameSettingsProps> = ({
             </p>
           </div>
 
-          <div className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-200">
-            <div className="flex items-center gap-3">
-              {config.soundEnabled ? (
-                <Volume2 className="w-5 h-5 text-purple-600" />
-              ) : (
-                <VolumeX className="w-5 h-5 text-gray-400" />
-              )}
-              <Label htmlFor="soundEnabled" className="text-base font-medium cursor-pointer">
-                Sound {config.soundEnabled ? 'Enabled' : 'Disabled'}
-              </Label>
-            </div>
-            <Switch
-              id="soundEnabled"
-              checked={config.soundEnabled}
-              onCheckedChange={(checked) => handleChange('soundEnabled', checked)}
-              className="data-[state=checked]:bg-purple-600"
-            />
-          </div>
 
           <div className="flex gap-3 pt-4">
             <Button 

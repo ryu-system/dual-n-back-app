@@ -39,24 +39,24 @@ export const GameControls: React.FC<GameControlsProps> = ({
           <div className="grid grid-cols-2 gap-4">
             <Button
               onClick={onVisualInput}
-              className="h-16 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 relative overflow-hidden"
+              className="h-20 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 relative overflow-hidden"
               size="lg"
             >
-              <div className="flex flex-col items-center">
-                <Eye className="w-6 h-6 mb-1" />
-                <span className="text-lg font-bold">A</span>
-                <span className="text-xs opacity-80">Position</span>
+              <div className="flex flex-col items-center justify-center gap-1">
+                <Eye className="w-5 h-5" />
+                <span className="text-xl font-bold">A</span>
+                <span className="text-xs opacity-90 leading-none">Position</span>
               </div>
             </Button>
             <Button
               onClick={onAudioInput}
-              className="h-16 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 relative overflow-hidden"
+              className="h-20 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 relative overflow-hidden"
               size="lg"
             >
-              <div className="flex flex-col items-center">
-                <Type className="w-6 h-6 mb-1" />
-                <span className="text-lg font-bold">L</span>
-                <span className="text-xs opacity-80">Letter</span>
+              <div className="flex flex-col items-center justify-center gap-1">
+                <Type className="w-5 h-5" />
+                <span className="text-xl font-bold">L</span>
+                <span className="text-xs opacity-90 leading-none">Letter</span>
               </div>
             </Button>
           </div>
