@@ -88,3 +88,35 @@
 .animate-slideUp {
   animation: slideUp 0.3s ease-out;
 }
+
+/* Mobile touch optimization */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevent zoom on input focus */
+  input, select, textarea {
+    font-size: 16px;
+  }
+  
+  /* Reduce transform effects on mobile for better performance */
+  .transform {
+    will-change: transform;
+  }
+}
+
+/* Prevent horizontal scroll on small screens */
+body {
+  overflow-x: hidden;
+}
+
+/* Better viewport handling */
+@media (max-width: 480px) {
+  #root {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  }
+}

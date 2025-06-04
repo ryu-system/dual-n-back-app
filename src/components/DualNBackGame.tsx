@@ -56,7 +56,7 @@ export const DualNBackGame: React.FC = () => {
   if (gameResult) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-violet-950 flex items-center justify-center p-4">
-        <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 max-w-md w-full text-center space-y-6 shadow-2xl border border-white/20">
+        <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 sm:p-8 max-w-sm sm:max-w-md w-full text-center space-y-4 sm:space-y-6 shadow-2xl border border-white/20">
           <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full">
             <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -92,7 +92,7 @@ export const DualNBackGame: React.FC = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,119,198,0.3),transparent_70%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_80%,rgba(119,198,255,0.3),transparent_70%)]"></div>
         
-        <div className="flex flex-col lg:flex-row items-center gap-8 max-w-6xl w-full relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-8 max-w-6xl w-full relative z-10 px-4 sm:px-6 lg:px-8">
           <div className="flex-1 flex justify-center">
             <GameGrid
               activePosition={gameState.isRunning ? currentPosition : null}
@@ -102,7 +102,7 @@ export const DualNBackGame: React.FC = () => {
             />
           </div>
           
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 lg:gap-6 w-full lg:w-auto">
             <GameInfo
               currentTrialIndex={gameState.currentTrialIndex}
               totalTrials={gameConfig.totalTrials}

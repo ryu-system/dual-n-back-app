@@ -16,7 +16,7 @@ export const GameGrid: React.FC<GameGridProps> = ({
   currentLetter 
 }) => {
   return (
-    <div className="grid grid-cols-3 gap-6 p-8 bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl">
+    <div className="grid grid-cols-3 gap-3 sm:gap-4 lg:gap-6 p-4 sm:p-6 lg:p-8 bg-white/10 backdrop-blur-lg rounded-3xl border border-white/20 shadow-2xl max-w-xs sm:max-w-sm lg:max-w-none">
       {Array.from({ length: GRID_SIZE * GRID_SIZE }).map((_, index) => {
         const row = Math.floor(index / GRID_SIZE);
         const col = index % GRID_SIZE;
@@ -28,7 +28,7 @@ export const GameGrid: React.FC<GameGridProps> = ({
           <div
             key={index}
             className={cn(
-              "w-28 h-28 rounded-2xl transition-all duration-300 relative overflow-hidden",
+              "w-16 h-16 sm:w-20 sm:h-20 lg:w-28 lg:h-28 rounded-2xl transition-all duration-300 relative overflow-hidden",
               "bg-white/20 border-2 border-white/30 shadow-lg backdrop-blur-sm",
               "hover:scale-105 hover:shadow-xl",
               isActive && !showFeedback && "bg-gradient-to-br from-cyan-400 to-blue-500 border-cyan-300 shadow-cyan-400/50 scale-110",
@@ -41,7 +41,7 @@ export const GameGrid: React.FC<GameGridProps> = ({
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse" />
                 {currentLetter && (
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-4xl font-bold text-white drop-shadow-lg">
+                    <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg">
                       {currentLetter}
                     </span>
                   </div>
