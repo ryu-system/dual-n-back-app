@@ -1,54 +1,92 @@
-# React + TypeScript + Vite
+# Dual N-Back Cognitive Training Game
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web-based implementation of the Dual N-Back cognitive training game, designed to improve working memory and fluid intelligence.
 
-Currently, two official plugins are available:
+## 🎮 Game Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The Dual N-Back is a scientifically-backed cognitive training exercise where players must remember both visual positions and letters from N steps back in a sequence. This implementation features a beautiful, modern UI with glass morphism effects and smooth animations.
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Visual-Only Gameplay**: Letters are displayed directly on the grid for better accessibility
+- **Configurable Difficulty**: Adjust N-level from 1 to 5
+- **Modern UI Design**: 
+  - Glass morphism effects
+  - Gradient backgrounds
+  - Smooth animations and transitions
+  - Responsive design
+- **Game Statistics**: Track your performance and accuracy
+- **Local Storage**: Settings and statistics are saved locally
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/dual-n-back-app.git
+cd dual-n-back-app
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Install dependencies:
+```bash
+npm install
 ```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+The built files will be in the `dist` directory.
+
+## 🎯 How to Play
+
+1. **Watch the Grid**: A blue square will appear in one of the 9 positions with a letter
+2. **Remember N-Back**: Compare the current position and letter with what appeared N trials ago
+3. **Press Keys**:
+   - Press **'A'** if the position matches N trials back
+   - Press **'L'** if the letter matches N trials back
+   - You can press both, one, or neither depending on matches
+4. **Track Progress**: Your accuracy is displayed after each session
+
+## 🛠️ Tech Stack
+
+- **React** with TypeScript
+- **Vite** for fast development and building
+- **Tailwind CSS** for styling
+- **Lucide React** for icons
+- **Local Storage** for data persistence
+
+## 📦 Project Structure
+
+```
+src/
+├── components/         # React components
+│   ├── ui/            # Reusable UI components
+│   └── ...            # Game-specific components
+├── hooks/             # Custom React hooks
+├── types/             # TypeScript type definitions
+└── lib/               # Utility functions
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is open source and available under the MIT License.
