@@ -8,7 +8,7 @@ import { GameInfo } from './GameInfo';
 import { GameSettings } from './GameSettings';
 import { GameStats } from './GameStats';
 import { Button } from '@/components/ui/button';
-import { Settings, BarChart3, Play, Eye, Type } from 'lucide-react';
+import { Settings, BarChart3 } from 'lucide-react';
 import type { GameConfig, GameResult } from '../types/game';
 import { DEFAULT_CONFIG } from '../types/game';
 
