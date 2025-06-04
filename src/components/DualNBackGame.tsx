@@ -86,13 +86,13 @@ export const DualNBackGame: React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-violet-950 flex items-center justify-center p-4 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-violet-950 flex items-center justify-center p-2 sm:p-4 relative overflow-hidden">
         {/* Background decoration */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(120,119,198,0.3),transparent_70%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,119,198,0.3),transparent_70%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_40%_80%,rgba(119,198,255,0.3),transparent_70%)]"></div>
         
-        <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-8 max-w-6xl w-full relative z-10 px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center gap-2 sm:gap-4 lg:gap-8 lg:flex-row max-w-6xl w-full relative z-10 px-2 sm:px-4 lg:px-8">
           <div className="flex-1 flex justify-center">
             <GameGrid
               activePosition={gameState.isRunning ? currentPosition : null}
@@ -102,7 +102,7 @@ export const DualNBackGame: React.FC = () => {
             />
           </div>
           
-          <div className="flex flex-col gap-4 lg:gap-6 w-full lg:w-auto">
+          <div className="flex flex-col gap-2 sm:gap-4 lg:gap-6 w-full lg:w-auto">
             <GameInfo
               currentTrialIndex={gameState.currentTrialIndex}
               totalTrials={gameConfig.totalTrials}
@@ -118,7 +118,7 @@ export const DualNBackGame: React.FC = () => {
             />
             
             {!gameState.isRunning && (
-              <div className="space-y-3">
+              <div className="space-y-2 sm:space-y-3">
                 <Button
                   variant="outline"
                   onClick={() => setShowSettings(true)}
