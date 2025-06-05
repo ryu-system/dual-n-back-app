@@ -2,6 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Default dark theme */
+  --color-background: #030712;
+  --color-backgroundGradient: from-indigo-950 via-purple-900 to-violet-950;
+  --color-primary: #6366f1;
+  --color-primaryGradient: from-indigo-600 to-purple-600;
+  --color-secondary: #a78bfa;
+  --color-text: #f9fafb;
+  --color-textMuted: #9ca3af;
+  --color-cardBg: rgba(0, 0, 0, 0.4);
+  --color-cardBorder: rgba(255, 255, 255, 0.1);
+  --color-gridCell: rgba(255, 255, 255, 0.1);
+  --color-gridCellActive: from-cyan-500 to-blue-600;
+  --color-correct: from-emerald-500 to-green-600;
+  --color-incorrect: from-red-500 to-rose-600;
+}
+
+/* Theme-aware component styles */
+.theme-card {
+  background-color: var(--color-cardBg);
+  border: 1px solid var(--color-cardBorder);
+}
+
+.theme-button-outline {
+  background-color: var(--color-cardBg);
+  border: 1px solid var(--color-cardBorder);
+  color: var(--color-text);
+}
+
+.theme-button-outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.theme-gradient-primary {
+  background: linear-gradient(to right, #6366f1, #a855f7);
+}
+
+.theme-gradient-correct {
+  background: linear-gradient(to right, #10b981, #059669);
+}
+
+.theme-gradient-incorrect {
+  background: linear-gradient(to right, #ef4444, #dc2626);
+}
+
+.theme-gradient-bg {
+  background: linear-gradient(to bottom right, #1e1b4b, #581c87, #4c1d95);
+}
+
+[data-theme="light"] .theme-gradient-bg {
+  background: linear-gradient(to bottom right, #eff6ff, #e0e7ff, #f3e8ff);
+}
+
+[data-theme="light"] .theme-gradient-primary {
+  background: linear-gradient(to right, #4f46e5, #8b5cf6);
+}
+
+[data-theme="light"] .theme-gradient-correct {
+  background: linear-gradient(to right, #10b981, #059669);
+}
+
+[data-theme="light"] .theme-gradient-incorrect {
+  background: linear-gradient(to right, #ef4444, #dc2626);
+}
+
+[data-theme="custom"] .theme-gradient-bg {
+  background: linear-gradient(to bottom right, #0f172a, #581c87, #0f172a);
+}
+
+[data-theme="custom"] .theme-gradient-primary {
+  background: linear-gradient(to right, #e879f9, #ec4899);
+}
+
+[data-theme="custom"] .theme-gradient-correct {
+  background: linear-gradient(to right, #10b981, #14b8a6);
+}
+
+[data-theme="custom"] .theme-gradient-incorrect {
+  background: linear-gradient(to right, #fb923c, #ef4444);
+}
+
+.theme-text {
+  color: var(--color-text);
+}
+
+.theme-text-muted {
+  color: var(--color-textMuted);
+}
+
+.theme-text-primary {
+  color: var(--color-primary);
+}
+
+.theme-text-secondary {
+  color: var(--color-secondary);
+}
+
 /* Custom animations and styles */
 @keyframes float {
   0%, 100% {
@@ -87,4 +185,36 @@
 
 .animate-slideUp {
   animation: slideUp 0.3s ease-out;
+}
+
+/* Mobile touch optimization */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Prevent zoom on input focus */
+  input, select, textarea {
+    font-size: 16px;
+  }
+  
+  /* Reduce transform effects on mobile for better performance */
+  .transform {
+    will-change: transform;
+  }
+}
+
+/* Prevent horizontal scroll on small screens */
+body {
+  overflow-x: hidden;
+}
+
+/* Better viewport handling */
+@media (max-width: 480px) {
+  #root {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  }
 }

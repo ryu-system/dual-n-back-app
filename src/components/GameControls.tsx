@@ -17,8 +17,8 @@ export const GameControls: React.FC<GameControlsProps> = ({
   currentLevel,
 }) => {
   return (
-    <div className="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
-      <div className="space-y-6">
+    <div className="w-full max-w-xs sm:max-w-md bg-white/10 backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-white/20 shadow-xl">
+      <div className="space-y-3 sm:space-y-4 lg:space-y-6">
         <div className="text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-violet-500 to-purple-600 rounded-2xl mb-3">
             <span className="text-2xl font-bold text-white">{currentLevel}</span>
@@ -36,10 +36,10 @@ export const GameControls: React.FC<GameControlsProps> = ({
             Start Game
           </Button>
         ) : (
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             <Button
               onClick={onVisualInput}
-              className="h-20 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 relative overflow-hidden"
+              className="h-16 sm:h-20 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 relative overflow-hidden touch-manipulation"
               size="lg"
             >
               <div className="flex flex-col items-center justify-center gap-1">
@@ -50,7 +50,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
             </Button>
             <Button
               onClick={onAudioInput}
-              className="h-20 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 relative overflow-hidden"
+              className="h-16 sm:h-20 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 relative overflow-hidden touch-manipulation"
               size="lg"
             >
               <div className="flex flex-col items-center justify-center gap-1">

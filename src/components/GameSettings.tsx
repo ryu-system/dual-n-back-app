@@ -1,8 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Settings2 } from 'lucide-react';
-import type { GameConfig } from '../types/game';
+import { Settings2, Palette, Grid3x3 } from 'lucide-react';
+import type { GameConfig, Theme } from '../types/game';
+import { MIN_GRID_SIZE, MAX_GRID_SIZE } from '../types/game';
+import { useTheme } from '@/hooks/useTheme';
 
 interface GameSettingsProps {
   config: GameConfig;
@@ -15,7 +17,9 @@ export const GameSettings: React.FC<GameSettingsProps> = ({
   onConfigChange,
   onClose,
 }) => {
-  const handleChange = (key: keyof GameConfig, value: any) => {
+  const { themeName, changeTheme, themes } = useTheme();
+
+  const handleChange = (key: keyof GameConfig, value: string | number | boolean) => {
     onConfigChange({
       ...config,
       [key]: value,
@@ -78,6 +82,51 @@ export const GameSettings: React.FC<GameSettingsProps> = ({
             </p>
           </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="gridSize">Grid Size</Label>
+            <div className="flex items-center gap-2">
+              <Grid3x3 className="w-5 h-5 text-gray-600" />
+              <select
+                id="gridSize"
+                aria-label="Select grid size"
+                className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                value={config.gridSize}
+                onChange={(e) => handleChange('gridSize', parseInt(e.target.value))}
+              >
+                {Array.from({ length: MAX_GRID_SIZE - MIN_GRID_SIZE + 1 }, (_, i) => i + MIN_GRID_SIZE).map((size) => (
+                  <option key={size} value={size}>
+                    {size}x{size}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Size of the game grid ({MIN_GRID_SIZE}x{MIN_GRID_SIZE} to {MAX_GRID_SIZE}x{MAX_GRID_SIZE})
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="theme">Theme</Label>
+            <div className="flex items-center gap-2">
+              <Palette className="w-5 h-5 text-gray-600" />
+              <select
+                id="theme"
+                aria-label="Select color theme"
+                className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                value={themeName}
+                onChange={(e) => changeTheme(e.target.value as Theme)}
+              >
+                {themes.map((theme) => (
+                  <option key={theme} value={theme}>
+                    {theme.charAt(0).toUpperCase() + theme.slice(1)}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Choose your preferred color theme
+            </p>
+          </div>
 
           <div className="flex gap-3 pt-4">
             <Button 
