@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect, useRef } from 'react';
-import type { GameState, GameConfig, Trial, Position } from '../types/game';
-import { GRID_SIZE, LETTERS } from '../types/game';
+import type { GameState, GameConfig, GameResult, Trial, Position } from '../types/game';
+import { LETTERS } from '../types/game';
 
-export const useGameLogic = (config: GameConfig, onGameEnd: (result: any) => void) => {
+export const useGameLogic = (config: GameConfig, onGameEnd: (result: GameResult) => void) => {
   const [gameState, setGameState] = useState<GameState>({
     isRunning: false,
     currentTrialIndex: 0,
@@ -17,10 +17,10 @@ export const useGameLogic = (config: GameConfig, onGameEnd: (result: any) => voi
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const generateRandomPosition = (): Position => ({
-    row: Math.floor(Math.random() * GRID_SIZE),
-    col: Math.floor(Math.random() * GRID_SIZE),
-  });
+  const generateRandomPosition = useCallback((gridSize: number): Position => ({
+    row: Math.floor(Math.random() * gridSize),
+    col: Math.floor(Math.random() * gridSize),
+  }), []);
 
   const generateRandomLetter = (): string => 
     LETTERS[Math.floor(Math.random() * LETTERS.length)];
@@ -32,7 +32,7 @@ export const useGameLogic = (config: GameConfig, onGameEnd: (result: any) => voi
     for (let i = 0; i < totalTrials; i++) {
       if (i < config.nLevel) {
         trials.push({
-          position: generateRandomPosition(),
+          position: generateRandomPosition(config.gridSize),
           letter: generateRandomLetter(),
           timestamp: Date.now(),
         });
@@ -42,7 +42,7 @@ export const useGameLogic = (config: GameConfig, onGameEnd: (result: any) => voi
         
         const position = shouldMatchVisual 
           ? trials[i - config.nLevel].position 
-          : generateRandomPosition();
+          : generateRandomPosition(config.gridSize);
         
         const letter = shouldMatchAudio 
           ? trials[i - config.nLevel].letter 
@@ -57,7 +57,7 @@ export const useGameLogic = (config: GameConfig, onGameEnd: (result: any) => voi
     }
 
     return trials;
-  }, [config.nLevel, config.totalTrials]);
+  }, [config.nLevel, config.totalTrials, config.gridSize, generateRandomPosition]);
 
 
   const startGame = useCallback(() => {

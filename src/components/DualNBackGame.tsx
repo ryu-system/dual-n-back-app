@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { useGameLogic } from '@/hooks/useGameLogic';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useGameHistory } from '@/hooks/useGameHistory';
+import { useTheme } from '@/hooks/useTheme';
 import { GameGrid } from './GameGrid';
 import { GameControls } from './GameControls';
 import { GameInfo } from './GameInfo';
@@ -9,7 +10,7 @@ import { GameSettings } from './GameSettings';
 import { GameStats } from './GameStats';
 import { Button } from '@/components/ui/button';
 import { Settings, BarChart3 } from 'lucide-react';
-import type { GameConfig, GameResult } from '../types/game';
+import type { GameConfig, GameResult, GridSize } from '../types/game';
 import { DEFAULT_CONFIG } from '../types/game';
 
 export const DualNBackGame: React.FC = () => {
@@ -18,6 +19,7 @@ export const DualNBackGame: React.FC = () => {
   const [showSettings, setShowSettings] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const { addResult } = useGameHistory();
+  useTheme();
 
   const handleGameEnd = useCallback((result: GameResult) => {
     setGameResult(result);
@@ -55,27 +57,27 @@ export const DualNBackGame: React.FC = () => {
 
   if (gameResult) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-violet-950 flex items-center justify-center p-4">
-        <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 sm:p-8 max-w-sm sm:max-w-md w-full text-center space-y-4 sm:space-y-6 shadow-2xl border border-white/20">
-          <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full">
+      <div className="min-h-screen flex items-center justify-center p-4 theme-gradient-bg">
+        <div className="theme-card backdrop-blur-sm rounded-3xl p-6 sm:p-8 max-w-sm sm:max-w-md w-full text-center space-y-4 sm:space-y-6 shadow-2xl">
+          <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 rounded-full theme-gradient-correct">
             <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Game Complete!</h2>
+          <h2 className="text-3xl font-bold theme-text">Game Complete!</h2>
           <div className="space-y-3">
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-4 space-y-2">
-              <p className="text-lg font-semibold text-gray-800">Accuracy: <span className="text-blue-600">{gameResult.accuracy.toFixed(1)}%</span></p>
-              <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
-                <p>Visual: <span className="font-semibold text-green-600">{gameResult.visualCorrect}</span></p>
-                <p>Audio: <span className="font-semibold text-purple-600">{gameResult.audioCorrect}</span></p>
+            <div className="theme-card rounded-2xl p-4 space-y-2">
+              <p className="text-lg font-semibold theme-text">Accuracy: <span className="theme-text-primary">{gameResult.accuracy.toFixed(1)}%</span></p>
+              <div className="grid grid-cols-2 gap-4 text-sm theme-text-muted">
+                <p>Visual: <span className="font-semibold theme-text-primary">{gameResult.visualCorrect}</span></p>
+                <p>Audio: <span className="font-semibold theme-text-secondary">{gameResult.audioCorrect}</span></p>
               </div>
-              <p className="text-sm text-gray-700">N-Level: <span className="font-bold text-indigo-600">{gameResult.nLevel}</span></p>
+              <p className="text-sm theme-text">N-Level: <span className="font-bold theme-text-primary">{gameResult.nLevel}</span></p>
             </div>
           </div>
           <Button
             onClick={() => setGameResult(null)}
-            className="w-full h-12 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+            className="w-full h-12 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 theme-gradient-primary"
           >
             Play Again
           </Button>
@@ -86,7 +88,7 @@ export const DualNBackGame: React.FC = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-violet-950 flex items-center justify-center p-2 sm:p-4 relative overflow-hidden">
+      <div className="min-h-screen flex items-center justify-center p-2 sm:p-4 relative overflow-hidden theme-gradient-bg">
         {/* Background decoration */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(120,119,198,0.3),transparent_70%)]"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,119,198,0.3),transparent_70%)]"></div>
@@ -99,6 +101,7 @@ export const DualNBackGame: React.FC = () => {
             showFeedback={gameState.showFeedback}
             feedbackType={gameState.feedbackType}
             currentLetter={gameState.isRunning ? currentLetter : null}
+            gridSize={gameConfig.gridSize as GridSize}
           />
           
           <GameControls
@@ -124,6 +127,7 @@ export const DualNBackGame: React.FC = () => {
               showFeedback={gameState.showFeedback}
               feedbackType={gameState.feedbackType}
               currentLetter={gameState.isRunning ? currentLetter : null}
+              gridSize={gameConfig.gridSize as GridSize}
             />
           </div>
           
@@ -147,7 +151,7 @@ export const DualNBackGame: React.FC = () => {
                 <Button
                   variant="outline"
                   onClick={() => setShowSettings(true)}
-                  className="w-full h-12 border-white/20 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:border-white/30 rounded-xl transition-all duration-200"
+                  className="w-full h-12 theme-button-outline backdrop-blur-sm rounded-xl transition-all duration-200"
                 >
                   <Settings className="w-5 h-5 mr-2" />
                   Settings
@@ -155,7 +159,7 @@ export const DualNBackGame: React.FC = () => {
                 <Button
                   variant="outline"
                   onClick={() => setShowStats(true)}
-                  className="w-full h-12 border-white/20 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 hover:border-white/30 rounded-xl transition-all duration-200"
+                  className="w-full h-12 theme-button-outline backdrop-blur-sm rounded-xl transition-all duration-200"
                 >
                   <BarChart3 className="w-5 h-5 mr-2" />
                   Statistics
