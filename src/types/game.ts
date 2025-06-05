@@ -14,7 +14,7 @@ export interface GameConfig {
   trialDuration: number;
   totalTrials: number;
   soundEnabled: boolean;
-  gridSize: number;
+  gridSize: GridSize;
 }
 
 export interface GameResult {
@@ -49,6 +49,14 @@ export const DEFAULT_CONFIG: GameConfig = {
   totalTrials: 20,
   soundEnabled: false,
   gridSize: DEFAULT_GRID_SIZE,
+};
+
+// Safe grid size validation function
+export const validateGridSize = (size: number): GridSize => {
+  if (size === 3 || size === 4 || size === 5) {
+    return size as GridSize;
+  }
+  return DEFAULT_GRID_SIZE;
 };
 
 export type Theme = 'light' | 'dark' | 'custom';

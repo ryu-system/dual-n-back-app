@@ -11,7 +11,7 @@ import { GameStats } from './GameStats';
 import { Button } from '@/components/ui/button';
 import { Settings, BarChart3 } from 'lucide-react';
 import type { GameConfig, GameResult, GridSize } from '../types/game';
-import { DEFAULT_CONFIG } from '../types/game';
+import { DEFAULT_CONFIG, validateGridSize } from '../types/game';
 
 export const DualNBackGame: React.FC = () => {
   const [gameConfig, setGameConfig] = useLocalStorage<GameConfig>('dual-n-back-config', DEFAULT_CONFIG);
@@ -101,7 +101,7 @@ export const DualNBackGame: React.FC = () => {
             showFeedback={gameState.showFeedback}
             feedbackType={gameState.feedbackType}
             currentLetter={gameState.isRunning ? currentLetter : null}
-            gridSize={gameConfig.gridSize as GridSize}
+            gridSize={validateGridSize(gameConfig.gridSize)}
           />
           
           <GameControls
@@ -127,7 +127,7 @@ export const DualNBackGame: React.FC = () => {
               showFeedback={gameState.showFeedback}
               feedbackType={gameState.feedbackType}
               currentLetter={gameState.isRunning ? currentLetter : null}
-              gridSize={gameConfig.gridSize as GridSize}
+              gridSize={validateGridSize(gameConfig.gridSize)}
             />
           </div>
           
