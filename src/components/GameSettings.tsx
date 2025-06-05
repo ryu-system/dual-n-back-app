@@ -1,7 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Settings2, Palette, Grid3x3 } from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
+import { Settings2, Palette, Grid3x3, Zap } from 'lucide-react';
 import type { GameConfig, Theme } from '../types/game';
 import { MIN_GRID_SIZE, MAX_GRID_SIZE } from '../types/game';
 import { useTheme } from '@/hooks/useTheme';
@@ -102,6 +103,24 @@ export const GameSettings: React.FC<GameSettingsProps> = ({
             </div>
             <p className="text-xs text-muted-foreground">
               Size of the game grid ({MIN_GRID_SIZE}x{MIN_GRID_SIZE} to {MAX_GRID_SIZE}x{MAX_GRID_SIZE})
+            </p>
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="autoAdjust">Auto-Adjust N-Level</Label>
+            <div className="flex items-center gap-3">
+              <Zap className="w-5 h-5 text-gray-600" />
+              <Switch
+                id="autoAdjust"
+                checked={config.autoAdjustNLevel}
+                onCheckedChange={(checked) => handleChange('autoAdjustNLevel', checked)}
+              />
+              <span className="text-sm text-gray-600">
+                {config.autoAdjustNLevel ? 'Enabled' : 'Disabled'}
+              </span>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Automatically adjust N-Level based on your performance
             </p>
           </div>
 

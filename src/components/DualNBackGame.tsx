@@ -28,7 +28,8 @@ export const DualNBackGame: React.FC = () => {
 
   const { gameState, startGame, handleInput } = useGameLogic(
     gameConfig,
-    handleGameEnd
+    handleGameEnd,
+    setGameConfig
   );
 
   const handleKeyPress = useCallback((event: KeyboardEvent) => {
@@ -117,6 +118,27 @@ export const DualNBackGame: React.FC = () => {
             totalTrials={gameConfig.totalTrials}
             nLevel={gameConfig.nLevel}
           />
+          
+          {!gameState.isRunning && (
+            <div className="flex gap-2 w-full max-w-sm">
+              <Button
+                variant="outline"
+                onClick={() => setShowSettings(true)}
+                className="flex-1 h-12 theme-button-outline backdrop-blur-sm rounded-xl transition-all duration-200"
+              >
+                <Settings className="w-5 h-5 mr-2" />
+                Settings
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => setShowStats(true)}
+                className="flex-1 h-12 theme-button-outline backdrop-blur-sm rounded-xl transition-all duration-200"
+              >
+                <BarChart3 className="w-5 h-5 mr-2" />
+                Statistics
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Desktop Layout (lg and above) */}
