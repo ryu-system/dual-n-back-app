@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import type { GameState, GameConfig, GameResult, Trial, Position } from '../types/game';
 import { LETTERS } from '../types/game';
 
-export const useGameLogic = (config: GameConfig, onGameEnd: (result: GameResult) => void) => {
+export const useGameLogic = (config: GameConfig, onGameEnd: (result: GameResult) => void, onConfigChange?: (newConfig: GameConfig) => void) => {
   const [gameState, setGameState] = useState<GameState>({
     isRunning: false,
     currentTrialIndex: 0,
@@ -110,6 +110,18 @@ export const useGameLogic = (config: GameConfig, onGameEnd: (result: GameResult)
       
       if (nextIndex >= prev.trials.length) {
         const result = calculateResults(prev, config);
+        
+        // Auto-adjust N-Level based on accuracy
+        if (config.autoAdjustNLevel && onConfigChange) {
+          const newNLevel = calculateNewNLevel(result.accuracy, config.nLevel);
+          if (newNLevel !== config.nLevel) {
+            onConfigChange({
+              ...config,
+              nLevel: newNLevel
+            });
+          }
+        }
+        
         onGameEnd(result);
         return {
           ...prev,
@@ -124,7 +136,7 @@ export const useGameLogic = (config: GameConfig, onGameEnd: (result: GameResult)
         feedbackType: null,
       };
     });
-  }, [config, onGameEnd]);
+  }, [config, onGameEnd, onConfigChange]);
 
   useEffect(() => {
     if (gameState.isRunning && gameState.currentTrialIndex < gameState.trials.length) {
@@ -193,4 +205,19 @@ function calculateResults(gameState: GameState, config: GameConfig) {
     nLevel: config.nLevel,
     date: new Date(),
   };
+}
+
+function calculateNewNLevel(accuracy: number, currentNLevel: number): number {
+  // Auto-adjust logic:
+  // - If accuracy >= 80%, increase N-Level (max 5)
+  // - If accuracy < 60%, decrease N-Level (min 1)
+  // - Otherwise, keep the same N-Level
+  
+  if (accuracy >= 80 && currentNLevel < 5) {
+    return currentNLevel + 1;
+  } else if (accuracy < 60 && currentNLevel > 1) {
+    return currentNLevel - 1;
+  }
+  
+  return currentNLevel;
 }

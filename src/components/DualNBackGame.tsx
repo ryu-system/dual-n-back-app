@@ -28,7 +28,8 @@ export const DualNBackGame: React.FC = () => {
 
   const { gameState, startGame, handleInput } = useGameLogic(
     gameConfig,
-    handleGameEnd
+    handleGameEnd,
+    setGameConfig
   );
 
   const handleKeyPress = useCallback((event: KeyboardEvent) => {
