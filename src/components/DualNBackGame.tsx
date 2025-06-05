@@ -10,7 +10,7 @@ import { GameSettings } from './GameSettings';
 import { GameStats } from './GameStats';
 import { Button } from '@/components/ui/button';
 import { Settings, BarChart3 } from 'lucide-react';
-import type { GameConfig, GameResult, GridSize } from '../types/game';
+import type { GameConfig, GameResult } from '../types/game';
 import { DEFAULT_CONFIG, validateGridSize } from '../types/game';
 
 export const DualNBackGame: React.FC = () => {
